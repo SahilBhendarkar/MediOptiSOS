@@ -1,205 +1,549 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="ISO-8859-1">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <meta charset="ISO-8859-1">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  <!-- Place CSS animations here -->
+  <style>
+
+    /* Header fade-in animation */
+    header {
+      opacity: 0;
+      animation: fadeIn 1.5s forwards;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+
+    /* Footer slide-up animation */
+    footer {
+      transform: translateY(100%);
+      animation: slideUp 1.5s forwards;
+    }
+
+    @keyframes slideUp {
+      from {
+        transform: translateY(100%);
+      }
+      to {
+        transform: translateY(0);
+      }
+    }
+
+    /* Hover animation for review cards */
+    .review:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Text color change on hover */
+    #heading1:hover,
+    #heading2:hover,
+    #heading3:hover,
+    #heading4:hover {
+      color: red !important;
+    }
+
+    /* Button hover effect */
+    .w3-button:hover {
+      background-color: #eb2f06 !important;
+    }
+
+    /* Card flip animation */
+    .flip-card {
+      perspective: 1000px; /* Remove this line if you don't want the 3D effect */
+    }
+
+    .flip-card-inner {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      transition: transform 0.6s;
+      transform-style: preserve-3d;
+    }
+
+    .flip-card:hover .flip-card-inner {
+      transform: rotateY(180deg);
+    }
+
+    .flip-card-front, .flip-card-back {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      backface-visibility: hidden;
+    }
+
+    .flip-card-front {
+      background-color: #bbb;
+      color: black;
+    }
+
+    .flip-card-back {
+      background-color: #eb2f06;
+      color: white;
+      transform: rotateY(180deg);
+    }
+  </style>
 
 
-
-<title>Find Pharmacy</title>
+  <title>Find Pharmacy</title>
 </head>
+
 <style>
-body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
-.w3-bar,h1,button {font-family: "Montserrat", sans-serif}
-.fa-anchor,.fa-coffee {font-size:200px}
+  /* Reset */
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
 
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
-*{
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: 'Poppins',sans-serif;
-  text-decoration: none;
-}
-footer{
-  width: 100%;
-  
-  bottom: 0;
-  left: 0;
-  background: #111;
-}
-footer .content{
-  max-width: 1350px;
-  margin: auto;
-  padding: 20px;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-}
-footer .content p,a{
-  color: #fff;
-}
-footer .content .box{
-  width: 33%;
-  transition: all 0.4s ease;
-}
-footer .content .topic{
-  font-size: 22px;
-  font-weight: 600;
-  color: #fff;
-  margin-bottom: 16px;
+  /* Fonts */
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
 
-}
-footer .content p{
-  text-align: justify;
-}
-footer .content .lower .topic{
-  margin: 24px 0 5px 0;
-}
-footer .content .lower i{
-  padding-right: 16px;
-}
-footer .content .middle{
-  padding-left: 80px;
-}
-footer .content .middle a{
-  line-height: 32px;
-}
-footer .content .right input[type="text"]{
-  height: 45px;
-  width: 100%;
-  outline: none;
-  color: #d9d9d9;
-  background: #000;
-  border-radius: 5px;
-  padding-left: 10px;
-  font-size: 17px;
-  border: 2px solid #222222;
-}
-footer .content .right input[type="submit"]{
-  height: 42px;
-  width: 100%;
-  font-size: 18px;
-  color: #d9d9d9;
-  background: #eb2f06;
-  outline: none;
-  border-radius: 5px;
-  letter-spacing: 1px;
-  cursor: pointer;
-  margin-top: 12px;
-  border: 2px solid #eb2f06;
-  transition: all 0.3s ease-in-out;
-}
-.content .right input[type="submit"]:hover{
-  background: none;
-  color:  #eb2f06;
-}
-footer .content .media-icons a{
-  font-size: 16px;
-  height: 45px;
-  width: 45px;
-  display: inline-block;
-  text-align: center;
-  line-height: 43px;
-  border-radius: 5px;
-  border: 2px solid #222222;
-  margin: 30px 5px 0 0;
-  transition: all 0.3s ease;
-}
-.content .media-icons a:hover{
-  border-color: #eb2f06;
-}
-footer .bottom{
-  width: 100%;
-  text-align: right;
-  color: #d9d9d9;
-  padding: 0 40px 5px 0;
-}
-footer .bottom a{
-  color: #eb2f06;
-}
-footer a{
-  transition: all 0.3s ease;
-}
-footer a:hover{
-  color: #eb2f06;
-}
-@media (max-width:1100px) {
-  footer .content .middle{
-    padding-left: 50px;
+  /* Body */
+  body {
+    font-family: 'Poppins', sans-serif;
   }
-}
-@media (max-width:950px){
-  footer .content .box{
-    width: 50%;
-  }
-  .content .right{
-    margin-top: 40px;
-  }
-}
-@media (max-width:560px){
-  footer{
-    position: relative;
-  }
-  footer .content .box{
+
+  /* Footer */
+  footer {
     width: 100%;
-    margin-top: 30px;
+    bottom: 0;
+    left: 0;
+    background: #111;
+    padding: 40px 0;
   }
-  footer .content .middle{
-    padding-left: 0;
+
+  footer .content {
+    max-width: 1350px;
+    margin: auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
   }
-}
+
+  footer .content p,
+  footer .content a {
+    color: #ccc;
+  }
+
+  footer .content .box {
+    width: 30%;
+    padding: 0 15px;
+  }
+
+  footer .content .topic {
+    font-size: 20px;
+    font-weight: 600;
+    color: #fff;
+    margin-bottom: 16px;
+  }
+
+  footer .content p {
+    text-align: justify;
+  }
+
+  footer .content .lower .topic {
+    margin: 24px 0 5px 0;
+  }
+
+  footer .content .lower i {
+    padding-right: 16px;
+  }
+
+  footer .content .middle {
+    padding-left: 80px;
+  }
+
+  footer .content .middle a {
+    line-height: 32px;
+  }
+
+  footer .content .right input[type="text"] {
+    height: 45px;
+    width: 100%;
+    outline: none;
+    color: #ccc;
+    background: #222;
+    border-radius: 5px;
+    padding-left: 10px;
+    font-size: 16px;
+    border: 2px solid #444;
+  }
+
+  footer .content .right input[type="submit"] {
+    height: 42px;
+    width: 100%;
+    font-size: 16px;
+    color: #fff;
+    background: #eb2f06;
+    outline: none;
+    border-radius: 5px;
+    letter-spacing: 1px;
+    cursor: pointer;
+    margin-top: 12px;
+    border: 2px solid #eb2f06;
+    transition: all 0.3s ease-in-out;
+  }
+
+  footer .content .right input[type="submit"]:hover {
+    background: #444;
+    border-color: #444;
+  }
+
+  footer .content .media-icons a {
+    font-size: 16px;
+    height: 45px;
+    width: 45px;
+    display: inline-block;
+    text-align: center;
+    line-height: 43px;
+    border-radius: 5px;
+    border: 2px solid #444;
+    margin: 30px 5px 0 0;
+    transition: all 0.3s ease;
+  }
+
+  footer .content .media-icons a:hover {
+    border-color: #eb2f06;
+  }
+
+  footer .bottom {
+    width: 100%;
+    text-align: right;
+    color: #ccc;
+    padding: 20px 40px 5px 0;
+  }
+
+  footer .bottom a {
+    color: #eb2f06;
+  }
+
+  footer a:hover {
+    color: #eb2f06;
+  }
+
+  @media (max-width: 1100px) {
+    footer .content .middle {
+      padding-left: 50px;
+    }
+  }
+
+  @media (max-width: 950px) {
+    footer .content .box {
+      width: 50%;
+    }
+
+    footer .content .right {
+      margin-top: 40px;
+    }
+  }
+
+  @media (max-width: 560px) {
+    footer {
+      position: relative;
+    }
+
+    footer .content .box {
+      width: 100%;
+      margin-top: 30px;
+    }
+
+    footer .content .middle {
+      padding-left: 0;
+    }
+  }
+
+
+
+
+
+
+  body, h2, p {
+      margin: 0;
+      padding: 0;
+  }
+
+  .review-container {
+      overflow-x: scroll; /* Enable horizontal scrolling */
+      white-space: nowrap; /* Prevent reviews from wrapping */
+      -webkit-overflow-scrolling: touch; /* Enable smooth scrolling on iOS */
+      margin: 20px auto; /* Center the container */
+      max-width: 100%; /* Allow the container to take up full width */
+      position: relative; /* Position for scroll buttons */
+  }
+
+  .review {
+      display: inline-block; /* Display reviews side by side */
+      background-color: #f9f9f9;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      padding: 20px;
+      margin: 10px;
+      width: 300px; /* Set fixed width for each review */
+      box-sizing: border-box; /* Include padding and border in width calculation */
+      vertical-align: top; /* Align reviews to the top */
+  }
+
+  .review h2 {
+      font-size: 18px;
+      margin-bottom: 10px;
+  }
+
+  .review p {
+      font-size: 16px;
+      color: #333;
+      margin-bottom: 10px;
+  }
+
+  .rating {
+      font-size: 14px;
+      color: #666;
+  }
+
+  .logo {
+      width: 100px; /* Adjust the width of the logo */
+      height: auto;
+      margin-bottom: 10px;
+  }
+
+  /* Buttons for scrolling */
+  .scroll-button {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 30px;
+      height: 30px;
+      background-color: rgba(0, 0, 0, 0.5);
+      color: white;
+      text-align: center;
+      line-height: 30px;
+      cursor: pointer;
+  }
+
+  .scroll-button.left {
+      left: 0;
+  }
+
+  .scroll-button.right {
+      right: 0;
+  }
+
+  #heading1:hover{
+  color:red !important;
+  }
+
+  #heading2:hover{
+  color:red !important;
+  }
+
+  #heading3:hover{
+  color:red !important;
+  }
+
+  #heading4:hover{
+  color:red !important;
+  }
+
+  .contact h2 {
+              color: #fff; /* Change the color to white */
+               }
+
+
 
 </style>
 <body>
+
+
 <!-- Navbar -->
 <div class="w3-top">
   <div class="w3-bar w3-red w3-card w3-left-align w3-large">
-    <a class="w3-bar-item w3-button w3-hide-medium w3-hide-large w3-right w3-padding-large w3-hover-white w3-large w3-red" href="javascript:void(0);" onclick="myFunction()" title="Toggle Navigation Menu"><i class="fa fa-bars"></i></a>
-    <a href="#" class="w3-bar-item w3-button w3-padding-large w3-white">Home</a>
-    <a href="login.jsp" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white">Login</a>
-    <a href="UserReg.jsp" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white">Sign up</a>
-    <a href="#about" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white">About us</a>
-    <a href="#contact" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white">Contact us</a>
-  </div>
-  
-  <!-- Navbar on small screens -->
-  <div id="navDemo" class="w3-bar-block w3-white w3-hide w3-hide-large w3-hide-medium w3-large">
+    <a href="index.html" class="w3-bar-item w3-button w3-padding-large">Home</a>
     <a href="login.jsp" class="w3-bar-item w3-button w3-padding-large">Login</a>
     <a href="UserReg.jsp" class="w3-bar-item w3-button w3-padding-large">Sign up</a>
     <a href="#about" class="w3-bar-item w3-button w3-padding-large">About us</a>
     <a href="#contact" class="w3-bar-item w3-button w3-padding-large">Contact us</a>
+    <a href="bloodbank.jsp" class="w3-bar-item w3-button w3-padding-large">Blood Bank</a>
+    <a href="ambulanceBooking.jsp" class="w3-bar-item w3-button w3-padding-large">Ambulance Booking</a>
+
   </div>
+</div>
+
+
+<!-- Navbar on small screens -->
+<div id="navDemo" class="w3-bar-block w3-white w3-hide w3-hide-large w3-hide-medium w3-large">
+  <a href="login.jsp" class="w3-bar-item w3-button w3-padding-large">Login</a>
+  <a href="UserReg.jsp" class="w3-bar-item w3-button w3-padding-large">Sign up</a>
+  <a href="#about" class="w3-bar-item w3-button w3-padding-large">About us</a>
+  <a href="#contact" class="w3-bar-item w3-button w3-padding-large">Contact us</a>
+  <a href="bloodbank.jsp" class="w3-bar-item w3-button w3-padding-large">Blood Bank</a>
+  <a href="ambulanceBooking.jsp" class="w3-bar-item w3-button w3-padding-large">Ambulance Booking</a>
+</div>
+
 </div>
 <!-- Header -->
 <header class="w3-container w3-red w3-center" style="padding:128px 16px; background-image: url('resources/images/Mediiii bg.jpg'); background-size: cover;">
   <h1 class="w3-margin w3-jumbo" style="color: white;">Medicine Search Engine</h1>
   <p class="w3-xlarge" style="color: white;">Find Pharmacy.....</p>
-  <a href="login.jsp" class="w3-button w3-white w3-padding-large w3-large w3-margin-top">Get Started</a>
+  <a href="login.jsp" class="w3-button w3-white w3-padding-large w3-large w3-margin-top" style="text-decoration: none; border-radius: 5px; background-color: #eb2f06; color: white;">Get Started</a>
 </header>
 
 
 
+<!-- Ask a Question About Medicines -->
+
+<div style="background-color: #f0f0f0; padding: 20px; border-radius: 10px;">
+  <h2 style="color: #333333;" hover>Question About Medicines</h2>
+  <div style="margin-bottom: 20px;">
+    <h3 id="heading1" style="color: #555555;">Q: What are the common side effects of ibuprofen?</h3>
+    <p style="color: #777777;">A: Common side effects of ibuprofen include stomach pain, heartburn, nausea, and headache.</p>
+  </div>
+
+  <div style="margin-bottom: 20px;">
+    <h3 id="heading2"  style="color: #555555;">Q: Can I take paracetamol with antibiotics?</h3>
+    <p style="color: #777777;">A: Generally, it is safe to take paracetamol with antibiotics, but it's always best to consult with your doctor or pharmacist to ensure there are no interactions.</p>
+  </div>
+
+  <div style="margin-bottom: 20px;">
+    <h3 id="heading3"  style="color: #555555;">Q: What should I do if I miss a dose of my medication?</h3>
+    <p style="color: #777777;">A: If you miss a dose of your medication, take it as soon as you remember. However, if it's almost time for your next dose, skip the missed dose and continue with your regular dosing schedule. Do not double the dose to catch up.</p>
+  </div>
+
+  <div style="margin-bottom: 20px;">
+    <h3 id="heading4"  style="color: #555555;">Q: How should I store my prescription medications?</h3>
+    <p style="color: #777777;">A: Prescription medications should be stored according to the instructions provided on the label or by your healthcare provider. Typically, medications should be stored in a cool, dry place away from direct sunlight and moisture. Some medications may require refrigeration.</p>
+  </div>
+
+  <!-- Add more question-answer pairs as needed -->
+
+  <h3 style="color: #555555;">Have a Question?</h3>
+  <form>
+    <label for="question" style="color: #555555; font-size: 16px;">Your Question:</label><br>
+    <textarea id="question" name="question" rows="4" style="width: 100%; margin-bottom: 10px;"></textarea><br>
+    <button type="submit" style="background-color: #4CAF50; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer;">Submit</button>
+  </form>
+</div>
+
+
+
+
+<!-- Ask a Question About Medicines-->
+
+
 <!-- First Grid -->
-<div class="w3-row-padding w3-padding-64 w3-container" id="about">
-  <div class="w3-content" >
-    <div class="w3-twothird">
-      <h1>Online Pharmacy Management System</h1>
-      <h5 class="w3-padding-32">Find Medicine In Your Nearest Shop</h5>
-
-      <p class="w3-text-grey"></p>
+<div class="w3-row-padding w3-padding-32">
+  <div class="w3-third w3-margin-bottom" style="position: relative;">
+    <div class="w3-card" style="border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+      <header class="w3-container w3-grey" style="position: absolute; top: 0; left: 0; width: 100%; text-align: center; border-top-left-radius: 10px; border-top-right-radius: 10px;">
+        <h3 style="color: #fff; font-weight: 600; padding: 20px 0;">Paracetamol</h3>
+      </header>
+      <div class="w3-container" style="padding: 20px;">
+        <img src="resources/images/paracetamol-tablets.jpg" alt="Medicine 1" style="width: 100%; border-bottom-left-radius: 10px; border-bottom-right-radius: 10px;">
+        <p style="margin-top: 20px; color: #444;">Paracetamol is a medicine used to treat mild to moderate pain. Paracetamol can also be used to treat fever (high temperature).</p>
+      </div>
     </div>
+  </div>
 
-    <div class="w3-third w3-center">
-      <i class=></i>
+  <!-- Add more medicine info boxes -->
+
+  <div class="w3-third w3-margin-bottom" style="position: relative;">
+    <div class="w3-card" style="border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+      <header class="w3-container w3-blue" style="position: absolute; top: 0; left: 0; width: 100%; text-align: center; border-top-left-radius: 10px; border-top-right-radius: 10px;">
+        <h3 style="color: #fff; font-weight: 600; padding: 20px 0;">Baclofen</h3>
+      </header>
+      <div class="w3-container" style="padding: 20px;">
+        <img src="resources/images/Baclofen tablet.jpg" alt="Medicine 2" style="width: 100%; border-bottom-left-radius: 10px; border-bottom-right-radius: 10px;">
+        <p style="margin-top: 20px; color: #444;">Baclofen (also known as Lioresal®) is a medicine that helps relax muscles and prevent muscle spasms. It is available as a 10 mg tablet and an oral liquid suspension made by the pharmacy. Both are taken by mouth.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="w3-third w3-margin-bottom" style="position: relative;">
+    <div class="w3-card" style="border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+      <header class="w3-container w3-grey" style="position: absolute; top: 0; left: 0; width: 100%; text-align: center; border-top-left-radius: 10px; border-top-right-radius: 10px;">
+        <h3 style="color: #fff; font-weight: 600; padding: 20px 0;">Captopril</h3>
+      </header>
+      <div class="w3-container" style="padding: 20px;">
+        <img src="resources/images/Captopril.jpg" alt="Medicine 3" style="width: 100%; border-bottom-left-radius: 10px; border-bottom-right-radius: 10px;">
+        <p style="margin-top: 20px; color: #444;">Captopril Tablets. Captopril is a medication that treats high blood pressure, heart failure and heart damage after a heart attack. The brand name of this medication is Capoten®.</p>
+      </div>
     </div>
   </div>
 </div>
 
+<!-- Add more medicine info boxes -->
+
+<div class="review-container">
+  <!-- Add more reviews here -->
+  <br>
+  <br>
+
+  <br>
+
+  <h1> <center>OUR CUSTOMERS REVIEWS</center></h1>
+  <br>
+
+  <br>
+
+  <div class="review">
+    <img class="logo" src="resources/images/customer-icon-for-your-website-design-logo-app-ui-free-vector.jpg" alt="Customer 1 Logo">
+    <h2>Customer 1</h2>
+    <p>This Website is amazing! <br>I've been using it for weeks now<br> and I couldn't be happier with<br> the results.</p>
+    <div class="rating">5 stars</div>
+  </div>
+  <div class="review">
+    <img class="logo" src="resources/images/customer-icon-for-your-website-design-logo-app-ui-free-vector.jpg" alt="Customer 2 Logo">
+    <h2>Customer 2</h2>
+    <p>I was skeptical at first, but <br>after trying this Website,<br> I'm a believer! Highly recommended.</p>
+    <div class="rating">4 stars</div>
+  </div>
+  <div class="review">
+    <img class="logo" src="resources/images/customer-icon-for-your-website-design-logo-app-ui-free-vector.jpg" alt="Customer 3 Logo">
+    <h2>Customer 3</h2>
+    <p>This is the best site <br>I've ever used. It exceeded <br>all my expectations!</p>
+    <div class="rating">5 stars</div>
+  </div>
+  <div class="review">
+    <img class="logo" src="resources/images/customer-icon-for-your-website-design-logo-app-ui-free-vector.jpg" alt="Customer 4 Logo">
+    <h2>Customer 4</h2>
+    <p>Great Site! I've already <br>recommended it to all my<br> friends and family.</p>
+    <div class="rating">4 stars</div>
+  </div>
+  <div class="review">
+    <img class="logo" src="resources/images/customer-icon-for-your-website-design-logo-app-ui-free-vector.jpg" alt="Customer 5 Logo">
+    <h2>Customer 5</h2>
+    <p>This site saved<br> my brothers's life! It is very<br>useful in an emergency situtaion </p>
+    <div class="rating">5 stars</div>
+  </div>
+  <!-- Add more reviews here -->
+  <div class="review">
+    <img class="logo" src="resources/images/customer-icon-for-your-website-design-logo-app-ui-free-vector.jpg" alt="Customer 6 Logo">
+    <h2>Customer 6</h2>
+    <p>Simply amazing. The results <br>speak for themselves!</p>
+    <div class="rating">4.5 stars</div>
+  </div>
+
+  <!-- Repeat the above review divs for more customers -->
+</div>
+
+
+
+<style>
+  .w3-card:hover .w3-container {
+    background-color: #f0f0f0;
+  }
+</style>
 <!-- Second Grid -->
 <div class="w3-row-padding w3-light-grey w3-padding-64 w3-container">
   <div class="w3-content">
@@ -214,73 +558,122 @@ footer a:hover{
     </div>
   </div>
 </div>
-<!--  
+<!--
 <div class="w3-container w3-black w3-center w3-opacity w3-padding-64" id="contact">
     <h1 class="w3-margin w3-xlarge">Quote of the day: live life</h1>
 </div>-->
 
+
+
+
+
 <!-- Footer -->
-<footer class="w3-container" id="contact">
-   <div class="content">
-     <div class="left box">
-       <div class="upper">
-         <div class="topic">About us</div>
-         <p>Welcome to The System, your ultimate online platform for
-          effortless medicine searches and locating nearby medical stores.
-           We streamline your experience by providing a user-friendly 
-           interface to search for any medication and discover nearby pharmacies,
-            complete with addresses integrated seamlessly with Google Maps. 
+<footer class="w3-container" id="about">
+  <footer class="w3-container" id="contact">
+    <div class="content">
+      <div class="left box">
+        <div class="upper">
+          <div class="topic">About us</div>
+          <p>Welcome to The System, your ultimate online platform for
+            effortless medicine searches and locating nearby medical stores.
+            We streamline your experience by providing a user-friendly
+            interface to search for any medication and discover nearby pharmacies,
+            complete with addresses integrated seamlessly with Google Maps.
             Your convenient and reliable solution for all your medical needs!</p>
-       </div>
-       <div class="lower">
-         <div class="topic">Contact us</div>
-         <div class="phone">
-           <a href="#"><i class="fas fa-phone-volume"></i>+91 935 659 5332</a>
-         </div>
-         <div class="email">
-           <a href="#"><i class="fas fa-envelope"></i>sahilbhendarkar19@gmail.com</a>
-         </div>
-       </div>
-     </div>
-     <div class="middle box">
-       <div class="topic">Our Services</div>
-       <div><a href="#">Our Comprehensive Range of Services Includes the Ability
-            to Effortlessly Locate Any Prescribed Medication in Close Proximity to Your
-           Current Location, Ensuring Convenience and Accessibility When You Need It Most.</a></div>
-       <div><a href="#"></a></div>
-     </div>
-     <div class="right box">
-       <div class="topic">Subscribe us</div>
-       <form action="#">
-         <input type="text" placeholder="Enter email address">
-         <input type="submit" name="" value="Send">
-         <div class="media-icons">
-           <a href="#"><i class="fab fa-facebook-f"></i></a>
-           <a href="#"><i class="fab fa-instagram"></i></a>
-           <a href="#"><i class="fab fa-twitter"></i></a>
-           <a href="#"><i class="fab fa-youtube"></i></a>
-         </div>
-       </form>
-     </div>
-   </div>
-   <div class="bottom">
-     <p></a></p>
-   </div>
- </footer>
+        </div>
+        <!-- Contact Section -->
+        <div class="lower">
+          <section id="contact" class="contact">
+            <div class="container">
+              <h1 style="color: white;">Contact Us</h1>
+              <p>Have questions or feedback? Reach out to us!</p>
+              <form>
+                <input type="text" name="name" placeholder="Your Name" required>
+                <input type="email" name="email" placeholder="Your Email" required>
+                <textarea name="message" placeholder="Your Message" required></textarea>
+                <button type="submit" class="btn btn-primary" style="background-color:#eb2f06;">Send Message</button>
+              </form>
+            </div>
+          </section>
+        </div>
+      </div>
+      <div class="middle box">
+        <div class="topic">Our Services</div>
+        <div><a href="#">Our Comprehensive Range of Services Includes the Ability
+          to Effortlessly Locate Any Prescribed Medication in Close Proximity to Your
+          Current Location, Ensuring Convenience and Accessibility When You Need It Most.</a></div>
+        <div><a href="#"></a></div>
+      </div>
+      <div class="right box">
+        <div class="topic">Subscribe us</div>
+        <form action="#">
+          <input type="text" placeholder="Enter email address">
+          <input type="submit" name="" value="Send">
+          <div class="media-icons">
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-youtube"></i></a>
+          </div>
+        </form>
+      </div>
+    </div>
+    <div class="bottom">
+      <p></a></p>
+    </div>
+    <script>
+      document.addEventListener("DOMContentLoaded", function() {
+          // Smooth scroll for the "About us" link
+          const aboutUsLink = document.querySelector('a[href="#about"]');
+          aboutUsLink.addEventListener("click", function(event) {
+              event.preventDefault();
+              document.querySelector('#about').scrollIntoView({ behavior: 'smooth' });
+          });
+
+          // Smooth scroll for the "Contact us" link
+          const contactUsLink = document.querySelector('a[href="#contact"]');
+          contactUsLink.addEventListener("click", function(event) {
+              event.preventDefault();
+              document.querySelector('#contact').scrollIntoView({ behavior: 'smooth' });
+          });
+      });
+    </script>
+  </footer>
 
 
 
-<script>
-// Used to toggle the menu on small screens when clicking on the menu button
-function myFunction() {
-  var x = document.getElementById("navDemo");
-  if (x.className.indexOf("w3-show") == -1) {
-    x.className += " w3-show";
-  } else { 
-    x.className = x.className.replace(" w3-show", "");
-  }
-}
-</script>
+  <script>
+    // Used to toggle the menu on small screens when clicking on the menu button
+    function myFunction() {
+      var x = document.getElementById("navDemo");
+      if (x.className.indexOf("w3-show") == -1) {
+        x.className += " w3-show";
+      } else {
+        x.className = x.className.replace(" w3-show", "");
+      }
+    }
+
+
+
+    document.addEventListener("DOMContentLoaded", function() {
+        const container = document.querySelector(".review-container");
+        const scrollRight = document.querySelector(".scroll-button.right");
+        const scrollLeft = document.querySelector(".scroll-button.left");
+
+        // Scroll to the right when the right button is clicked
+        scrollRight.addEventListener("click", function() {
+            container.scrollBy({left: 300, behavior: "smooth"});
+        });
+
+        // Scroll to the left when the left button is clicked
+        scrollLeft.addEventListener("click", function() {
+            container.scrollBy({left: -300, behavior: "smooth"});
+        });
+    });
+
+  </script>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 
 </body>
 </html>

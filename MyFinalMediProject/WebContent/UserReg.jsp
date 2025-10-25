@@ -47,7 +47,7 @@
 
 .input-field:focus {
   border: 2px solid dodgerblue;
-  
+
 }
 
 /* Set a style for the submit button */
@@ -59,8 +59,8 @@
   cursor: pointer;
   width: 100%;
   opacity: 0.9;
-  
-  
+
+
 }
 
 .btn:hover {
@@ -70,7 +70,7 @@
 </head>
 <body>
 <jsp:include page="header.jsp"></jsp:include>
-<center>	
+<center>
 	<form action="UserRegServ" method="get">
 	<div class="container" style="height: 750px;">
 		<div class="registerbox w3-container w3-card-4 w3-light-grey" style="width: 500px; height: 600px;">

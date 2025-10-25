@@ -1,8 +1,11 @@
 package operateDao;
 
 import java.sql.*;
+import java.util.ArrayList;
 
 import connect.GetConnection;
+import model.ambulance;
+import model.showblood;
 
 public class crud {
 	
@@ -160,4 +163,106 @@ public static int addVenderreg(String first,String last,String email,String phon
 		}
 	return pin; 
  }
+
+
+	public static int addblood(String name,String address,int age,String gender,String bloodType) {
+		int status=0;
+		try {
+			Connection con=GetConnection.getConnection();
+			PreparedStatement ps=con.prepareStatement("INSERT INTO temp_blood ( name, address, age, gender, bloodType) values(?,?,?,?,?) ");
+			ps.setString(1, name);
+			ps.setString(2, address);
+			ps.setInt(3, age);
+			ps.setString(4, gender);
+			ps.setString(5, bloodType);
+
+			status=ps.executeUpdate();
+
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return status;
+	}
+
+	public static ArrayList<showblood> getAllBloodDonors()
+	{
+		ArrayList<showblood> bloodDonors = new ArrayList<>();
+		try {
+			// Establish connection to the database
+			Connection con = GetConnection.getConnection();
+			Statement st=con.createStatement();
+			// PreparedStatement ps = con.prepareStatement("SELECT * FROM temp_blood");
+
+			ResultSet rs = st.executeQuery("SELECT * FROM temp_blood");
+
+			while (rs.next()) {
+
+				// Create a new BloodDonor object and add it to the list
+				showblood donor = new showblood(rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getString(6));
+				bloodDonors.add(donor);
+			}
+
+			// Close ResultSet, PreparedStatement, and Connection
+			rs.close();
+			st.close();
+			con.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return bloodDonors;
+	}
+
+
+	public static int ambulancebook(String name,String ph_no,String destination,String pickup_location,String date_time) {
+		int amb=0;
+		try {
+			Connection con=GetConnection.getConnection();
+			PreparedStatement ps=con.prepareStatement("INSERT INTO ambulance (name,ph_no,destination,pickup_location,date_time) values(?,?,?,?,?) ");
+			ps.setString(1, name);
+			ps.setString(2, ph_no);
+			ps.setString(3, destination);
+			ps.setString(4, pickup_location);
+			ps.setString(5, date_time);
+
+			amb=ps.executeUpdate();
+
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return amb;
+
+
+	}
+
+
+
+	public static ArrayList<ambulance> ambulanceshow() {
+
+		ArrayList<ambulance> al=new ArrayList<>();
+		try {
+			Connection con=GetConnection.getConnection();
+			Statement st=con.createStatement();
+
+
+			ResultSet rs=st.executeQuery("SELECT * FROM ambulance");
+			while (rs.next())
+			{
+				ambulance a=new ambulance(rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getString(6));
+				al.add(a);
+
+			}
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+		return al;
+
+
+	}
+
+
 }
+
+

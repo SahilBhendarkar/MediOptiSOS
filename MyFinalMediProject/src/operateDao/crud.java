@@ -46,15 +46,15 @@ public static int addVenderreg(String first,String last,String email,String phon
 		ps.setString(7, pincode);
 		ps.setString(8, password);
 		ps.setString(9, glink);
-		
+
 		status=ps.executeUpdate();
-		
+
 	} catch (Exception e) {
 		e.printStackTrace();
 	}
 	return status;
-	
-	
+
+
 }
 
  public static boolean login(String sql,String userName,String pass) throws ClassNotFoundException, SQLException
@@ -126,31 +126,48 @@ public static int addVenderreg(String first,String last,String email,String phon
 	}
 	 return status;
  }
- 
- public static int updateProd(String pid,String pname,String mname,String mft_date,String exp_date,String power,String quantity,String price){
-	 int status=0;
-	 try {
-		 Connection con=GetConnection.getConnection();
-		  PreparedStatement ps=con.prepareStatement("UPDATE tbl_product SET pname=?, mname=?, mft_date=?, exp_date=?, power=?, quantity=?, price=? where pid =?");
-		  
-		  ps.setString(1, pname);
-		  ps.setString(2, mname);
-		  ps.setString(3, mft_date);
-		  ps.setString(4, exp_date);
-		  ps.setString(5, power);
-		  ps.setString(6, quantity);
-		  ps.setString(7, price);
-		  ps.setString(8, pid);
-		  
-		  status=ps.executeUpdate();
-	} catch (Exception e) {
-		e.printStackTrace();
-	
+
+	public static int updateProd(String pid, String pname, String mname, String mft_date, String exp_date,
+								 String power, String quantity, String price) {
+		int status = 0;
+		Connection con = null;
+		PreparedStatement ps = null;
+		try {
+			con = GetConnection.getConnection();
+			ps = con.prepareStatement(
+					"UPDATE tbl_product SET pname=?, mname=?, mft_date=?, exp_date=?, power=?, quantity=?, price=? WHERE pid=?"
+			);
+
+			ps.setString(1, pname);
+			ps.setString(2, mname);
+			ps.setString(3, mft_date);
+			ps.setString(4, exp_date);
+			ps.setString(5, power);
+
+			// Parse quantity as integer
+			ps.setInt(6, Integer.parseInt(quantity));
+
+			// Parse price as BigDecimal
+			ps.setBigDecimal(7, new java.math.BigDecimal(price));
+
+			ps.setString(8, pid);
+
+			status = ps.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (ps != null) ps.close();
+				if (con != null) con.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return status;
 	}
-	 return status;
- }
- 
- 
+
+
+
  public static String getPin(String vMail) throws SQLException
  {
 	 String pin=null;

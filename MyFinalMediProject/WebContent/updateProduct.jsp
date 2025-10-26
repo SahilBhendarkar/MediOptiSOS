@@ -74,7 +74,7 @@
 		<div class="w3-container w3-card-4 "
 			style="width: 1200px; height: 600px; margin-left: 50px; margin-top: 50px;"
 			method="get">
-			<form action="UpdateProdServ" method="get">
+			<form action="UpdateProdServ" method="post">
 				<div class="float-container" style="margin-top: 20px">
 					<div class="float-child">
 						<h3 style="margin-top: 20px">Product Name</h3>

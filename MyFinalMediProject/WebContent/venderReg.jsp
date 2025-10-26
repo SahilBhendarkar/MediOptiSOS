@@ -66,21 +66,21 @@
 <body>
 	<jsp:include page="header.jsp"></jsp:include>
 	<center>
-		
-	<form action="VenderRegServ" method="get">
+
+	<form action="VenderRegServ" method="post">
 	<div class="container" style="height: 850px;">
 		<div class="registerbox w3-container w3-card-4 w3-light-grey" style="width: 500px; height: 700px; ">
 			<h2 style="margin-top: 20px;">Register New Vender</h2>
 			<input type="text" name="fname" placeholder="Enter First Name" required>
 			<input type="text" name="lname" placeholder="Enter Last Name" required>
 			<input type="text" name="email" placeholder="Enter Email ID" required>
-			<input type="text"  name="phno" placeholder="Enter Phone Number" onkeypress="return event.charCode>= 48 && event.charCode<= 57" required>
-			<input type="text" name="vender" placeholder="Shop Name" required>
+            <input type="text" name="phno" placeholder="Phone Number" pattern="[0-9]{10}" title="Enter 10 digit phone number" required />
+            <input type="text" name="vender" placeholder="Shop Name" required>
 			<input type="text" name="address" placeholder="Enter Address" required>
 			<input type="text" name="link" placeholder="Enter location link" required>
 			<input type="text" name="pin" placeholder="Pincode" required>
 			<input type="password" name="pass1" placeholder="Enter Password" required>
-			
+
 			<input type="submit" value="Submit" style="margin-top: 20px;" >
 		</div>
 		</div>

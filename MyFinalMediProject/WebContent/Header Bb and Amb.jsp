@@ -92,6 +92,8 @@ footer {
 
 			 <a href="#" class="w3-bar-item w3-button w3-padding-large">About Us
 			</a> <a href="#" class="w3-bar-item w3-button w3-padding-large">Login</a>
+			<a href="bloodbank.jsp" class="w3-bar-item w3-button w3-padding-large">Blood Bank</a>
+              <a href="ambulanceBooking.jsp" class="w3-bar-item w3-button w3-padding-large">Ambulance Booking</a>
 		</div>
 	</div>
 

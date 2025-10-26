@@ -60,7 +60,7 @@
 					<td><%=rs.getString(7)%></td>
 					<td><%=rs.getString(8)%></td>
 					<td><a href="DeleteProdServ?pid=<%= rs.getInt(1)%>" class ="btn btn-danger">Delete</a> 
-					<a href="updateProduct.jsp?pid=<%= rs.getInt(1) %>" class="btn btn-info">Update</a></td>
+					   <a href="updateProduct.jsp?pid=<%= rs.getInt(1) %>" class="btn btn-info">Update</a></td>
 				</tr>
 			    <%
 			    } 
